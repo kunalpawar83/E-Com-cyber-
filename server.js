@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 //     })
 // })
 
-app.get('/kunal',(req,res)=>{
+app.get('/login',(req,res)=>{
     res.status(200).json({
         status:"hello",
         message:"kunal pawar"
