@@ -9,7 +9,7 @@ const app = express()
 app.use(express.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-app.get('/user',(req,res)=>{
+app.get('/',(req,res)=>{
     res.status(200).json({
         status:"hello",
         message:"kunal pawar"
