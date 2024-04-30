@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const key = "kunal_29/06/2003"
 
 const jwtAuthMiddleware  = ( req,res,next)=>{
       
@@ -11,7 +12,7 @@ const jwtAuthMiddleware  = ( req,res,next)=>{
     }
 
     try{
-        const decoded = jwt.verify(token,process.env.JWT_SECRET);
+        const decoded = jwt.verify(token,key);
         req.user = decoded;
         next();
 
@@ -27,7 +28,7 @@ const jwtAuthMiddleware  = ( req,res,next)=>{
 
 
 const generateToken = (userdata)=>{
-            return jwt.sign(userdata,process.env.JWT_SECRET);
+            return jwt.sign(userdata,key);
 };
 
 
