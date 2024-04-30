@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-require('./utils/db.js');
+const { connectDB } =  require('./utils/db.js');
+const PORT = process.env.PORT;
 
 const app = express()
 
@@ -22,6 +23,8 @@ app.get('/login',(req,res)=>{
     })
 })
 
-app.listen(process.env.PORT,()=>{
-     console.log('listening on port',process.env.PORT);
-})
+connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`App listening on port ${PORT}`);
+    });
+  });

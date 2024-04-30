@@ -1,20 +1,17 @@
-const mongoose  = require('mongoose');
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://kunalpawar8319:kunalmain2018@e-com.8zrzv9l.mongodb.net/user');
-
-const db = mongoose.connection;
-
-db.on('connected',()=>{
-    console.log('connected to Mongodb server');
-});
-
-db.on('error',(err)=>{
-    console.log('mongodb connection error',err);
-});
-
-db.on('disconnected',()=>{
-    console.log('mongodb server disconnected');
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://kunalpawar8319:kunalmain2018@e-com.8zrzv9l.mongodb.net/user', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+  }
+};
 
 
-module.exports = db;
+module.exports = {connectDB};
+// 'mongodb+srv://kunalpawar8319:kunalmain2018@e-com.8zrzv9l.mongodb.net/user'
