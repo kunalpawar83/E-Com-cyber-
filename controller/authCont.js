@@ -60,6 +60,8 @@ exports.login = async(req,res)=>{
 };
 
 
+
+
 exports.getALlData = async(req,res)=>{
      try{
        const userData  = await User.find();
@@ -76,3 +78,4 @@ exports.getALlData = async(req,res)=>{
       })
      }
 }
+// kunal

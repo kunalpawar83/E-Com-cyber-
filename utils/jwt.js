@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const key = "kunal_29/06/2003"
 
+
+
 const jwtAuthMiddleware  = ( req,res,next)=>{
       
     const token = req.headers.authorization.split(' ')[1];
