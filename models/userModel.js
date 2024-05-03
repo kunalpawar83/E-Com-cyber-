@@ -52,3 +52,4 @@ userSc.methods.comparePassword = async function(candidatePassword){
 
 const User = mongoose.model('User',userSc);
 module.exports =User;
+ 
