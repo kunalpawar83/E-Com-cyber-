@@ -26,15 +26,9 @@ exports.createProduct = async(req,res)=>{
 exports.getAllProduct = async(req, res)=>{
   try{
     const productData= await Product.find();
-     
     res.status(200).json({
-      status:"success",
-      result:productData.length,
-      data:{
         productData
-      }
     })
-
   }catch(err){
     console.log(err);
     res.status(500).json({
