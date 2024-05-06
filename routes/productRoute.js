@@ -32,7 +32,7 @@ const multerStorage = multer.diskStorage({
 // create product 
 router.post('/createproduct',upload.single('image'),jwtAuthMiddleware,Prodcut.createProduct);
 // get all product
-router.get('/getallproduct',jwtAuthMiddleware,Prodcut.getAllProduct);
+router.get('/getallproduct',Prodcut.getAllProduct);
 // get product
 router.get('/getproduct',Prodcut.getProduct);
 // update product
