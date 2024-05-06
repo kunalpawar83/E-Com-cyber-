@@ -34,7 +34,7 @@ router.post('/createproduct',upload.single('image'),jwtAuthMiddleware,Prodcut.cr
 // get all product
 router.get('/getallproduct',Prodcut.getAllProduct);
 // get product
-router.get('/getproduct',Prodcut.getProduct);
+router.get('/getproduct/:id',Prodcut.getProduct);
 // update product
 router.put('/updateproduct',Prodcut.updateProduct);
 // delete product
