@@ -3,8 +3,8 @@ const Product = require('../models/productModel.js');
 exports.createProduct = async(req,res)=>{
     try{
         
-        const dataFile =  req.file.path;
-        req.body.image = dataFile;
+        // const dataFile =  req.file.path;
+        // req.body.image = dataFile;
         const userData = req.body;
         const newUser = Product(userData);
         const response = await newUser.save();
