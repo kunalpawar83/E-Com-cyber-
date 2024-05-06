@@ -38,7 +38,7 @@ router.get('/getproduct/:id',Prodcut.getProduct);
 // update product
 router.put('/updateproduct/:id',Prodcut.updateProduct);
 // delete product
-router.delete('/deleteproduct',Prodcut.deleteProduct);
+router.delete('/deleteproduct/:id',Prodcut.deleteProduct);
 
 
 

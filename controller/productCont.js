@@ -81,8 +81,21 @@ exports.updateProduct = async(req,res)=>{
 };
 
 exports.deleteProduct = async(req,res)=>{
-    res.status(200).json({
-        status:"success",
-        message:"just for test"
-    })
+    try{
+        const productData = await Product.findByIdAndDelete(req.params.id);
+        if(!productData){
+            res.status(404).json({
+                error:"product not found with that id "
+            })
+        }
+        res.status(200).json({
+            message:"done"
+        })
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            error:"internal server error"
+        })
+    }
 }
