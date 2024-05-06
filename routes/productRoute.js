@@ -11,7 +11,7 @@ const multerStorage = multer.diskStorage({
     },
     filename:(req,file,cb)=>{
        const ext = file.mimetype.split('/')[1];
-       cb(null,`user-${Date.now()}.${ext}`);
+       cb(null,`product-${Date.now()}.${ext}`);
     }
  });
  
@@ -30,13 +30,13 @@ const multerStorage = multer.diskStorage({
  
 
 // create product 
-router.post('/createproduct',upload.single('image'),jwtAuthMiddleware,Prodcut.createProduct);
+router.post('/createproduct',upload.single('image'),Prodcut.createProduct);
 // get all product
 router.get('/getallproduct',Prodcut.getAllProduct);
 // get product
 router.get('/getproduct/:id',Prodcut.getProduct);
 // update product
-router.put('/updateproduct',Prodcut.updateProduct);
+router.put('/updateproduct/:id',Prodcut.updateProduct);
 // delete product
 router.delete('/deleteproduct',Prodcut.deleteProduct);
 

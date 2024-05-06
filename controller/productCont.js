@@ -56,10 +56,28 @@ exports.getProduct = async(req,res)=>{
 };
 
 exports.updateProduct = async(req,res)=>{
-    res.status(200).json({
-        status:"success",
-        message:"just for test"
-    })
+    try{
+        const productId  = req.params.id;
+        const productData = req.body;
+        
+        const response = await Product.findByIdAndUpdate(productId,productData,{
+          new:true,
+          runValidators:true
+        })
+        if(!response){
+         return res.status(404).json({
+             error:"product not found with that id , Please send valid id"
+         })
+        }
+        res.status(200).json({
+         data:response
+     })
+     }catch(err){
+        console.log(err);
+        res.status(500).json({
+            error:"internal server error"
+        })
+     }
 };
 
 exports.deleteProduct = async(req,res)=>{
