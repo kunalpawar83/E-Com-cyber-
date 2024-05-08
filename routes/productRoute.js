@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const Prodcut = require('../controller/productCont.js');
 const {jwtAuthMiddleware} = require('../utils/jwt.js');
+const path = require('path');
 
 const multer = require('multer');
 
@@ -11,7 +12,7 @@ const multerStorage = multer.diskStorage({
     },
     filename:(req,file,cb)=>{
        const ext = file.mimetype.split('/')[1];
-       cb(null,`product-${Date.now()}.${ext}`);
+       cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
  });
  
