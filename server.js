@@ -6,6 +6,7 @@ const PORT = process.env.PORT;
 const userRoute = require('./routes/userRoute.js')
 const productRoute = require('./routes/productRoute.js');
 const categoryRoute = require('./routes/categoryRoute.js');
+const ratingRoute = require('./routes/ratingRoute.js');
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use('/user',userRoute);
 app.use('/product',productRoute);
 app.use('/category',categoryRoute);
+app.use('/rating',ratingRoute);
 
 connectDB().then(() => {
     app.listen(PORT, () => {
