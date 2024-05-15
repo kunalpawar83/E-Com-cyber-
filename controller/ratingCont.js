@@ -7,7 +7,7 @@ exports.createRating = async(req,res)=>{
         //req.body.image = dataFile;
         req.body.userid = req.user.id;
         const userData = req.body;
-        const newUser = Product(userData);
+        const newUser = Rating(userData);
         const response = await newUser.save();
         res.status(201).json({
             status:"success",
