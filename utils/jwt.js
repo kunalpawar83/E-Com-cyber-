@@ -4,24 +4,30 @@ const key = "kunal_29/06/2003"
 
 
 const jwtAuthMiddleware  = ( req,res,next)=>{
-      // Check for token in headers, query parameters, or request body
-      const token = req.headers.authorization || req.query.token || req.body.token;
-    
-      // Check if token exists
-      if (!token) {
-        return res.status(401).json({ error: 'Token is missing' });
-      }
-    
-      // Verify token
-      jwt.verify(token, secretKey, (err, decoded) => {
-        if (err) {
-          return res.status(401).json({ error: 'Invalid token' });
+    try{
+        const token  =  req.headers.authorization.split(" ")[1] ;
+        if(!token){
+         return res.status(403).json({
+            status:"fail",
+            error:"unauthorized"
+         })
         }
-        // Token is valid, store decoded payload for further processing
+
+        const decoded = jwt.verify(token,key);
         req.user = decoded;
-        next(); // Proceed to next middleware or route handler
-      });
-    };
+        next();
+
+    }catch(err){
+        console.log(err);
+        res.status(400).json({
+            status:"fail",
+            error:"Invalid token"
+        })
+                   
+    }
+};
+
+
 const generateToken = (userdata)=>{
             return jwt.sign(userdata,key);
 };
