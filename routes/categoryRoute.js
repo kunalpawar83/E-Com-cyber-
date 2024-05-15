@@ -7,6 +7,6 @@ const router = express.Router();
 // create category
 router.post('/createcategory', jwtAuthMiddleware,Category.createCategory);
 // get all category
-router.get('/getallcategory',Category.getAllCategory); 
+router.get('/getallcategory',jwtAuthMiddleware,Category.getAllCategory); 
 
 module.exports = router;
