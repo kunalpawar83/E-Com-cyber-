@@ -2,6 +2,7 @@ const Category = require('../models/categoryModel.js');
 
 // create category
 exports.createCategory = async(req,res)=>{
+    console.log(req.user.id);
     try{
         const categoryData = req.body;
         const newCategory = Category(categoryData);
