@@ -23,7 +23,13 @@ exports.createProduct = async(req,res)=>{
 
 exports.getAllProduct = async(req, res)=>{
   try{
-    const productData= await Product.find();
+    const { category , name } = req.query
+    console.log(name);
+    const filter = {};
+    if (category) {
+      filter.category = category;
+    }
+    const productData= await Product.find(filter);
     res.status(200).json({
         productData
     })
