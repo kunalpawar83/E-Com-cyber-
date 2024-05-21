@@ -91,4 +91,37 @@ exports.getALlData = async(req,res)=>{
       })
      }
 }
-// kunal
+// forget passwordd  
+exports.forgetPassword = async(req,res)=>{
+      // 1) Get user based on POSTed email
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res.status(404).json({
+           errr:"user not whit that email address"
+        })
+      }
+      // 2) Generate the random reset token
+      const resetToken = user.createPasswordResetToken();
+      await user.save({ validateBeforeSave: false });
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Your password reset token (valid for 10 min)',
+        message:`this is your token for reset your password  ${resetToken}`
+      });
+
+      res.status(200).json({
+        status: 'success',
+        message: 'Token sent to email!'
+      });
+    } catch (err) {
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await user.save({ validateBeforeSave: false });
+      console.log(err);
+      res.status(500).json({
+       status:"fail",
+       error:"Internal server error"
+      })
+    }
+}
