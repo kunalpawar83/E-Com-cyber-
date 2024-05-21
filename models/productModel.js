@@ -33,7 +33,7 @@ const productSc =  new mongoose.Schema({
 });
 
 const Product = new mongoose.model('Product',productSc);
-module.exports = Product;
+module.exports = {Product ,productSc };
 
 
 

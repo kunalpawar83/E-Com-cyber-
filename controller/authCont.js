@@ -1,5 +1,6 @@
 const User = require('../models/userModel.js');
 const {generateToken} = require('../utils/jwt.js');
+const sendEmail = require('../utils/email.js');
 
 exports.signup = async(req,res)=>{
     try{
@@ -13,6 +14,13 @@ exports.signup = async(req,res)=>{
       } 
       
       const token  = generateToken(payload);
+      //sendEmail(response.email,'Welcome to our website', `Thank you for registering with us! and your token is here ${token}`);
+      await sendEmail({
+         email: response.email,
+         subject: 'Welcome to our website',
+         message: `Thank you for registering with us! and your token is here ${token}`
+       });
+   
        res.status(201).json({
        status:"success",
        token:token,

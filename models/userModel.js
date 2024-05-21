@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const { productSc } = require('./productModel.js'); 
 
 const userSc = new mongoose.Schema({
      userName:{
@@ -21,9 +22,22 @@ const userSc = new mongoose.Schema({
 
      },
      mobile:{
-      type:Number,
+      type:String,
       required:true
-     }
+     },
+     address: {
+      type: String,
+      default: "",
+    },
+    cart: [
+      {
+        product: productSc,
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
 });
 
 userSc.pre('save', async function(next) {

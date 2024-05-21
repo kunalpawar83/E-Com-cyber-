@@ -78,4 +78,7 @@ exports.deleteUser  =  async(req,res)=>{
              error:'Internal server error'
         })
     }
-}
+};
+
+// forget password 
+
