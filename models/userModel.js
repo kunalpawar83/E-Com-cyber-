@@ -19,6 +19,10 @@ const userSc = new mongoose.Schema({
         type:String,
         required:true,
 
+     },
+     mobile:{
+      type:Number,
+      required:true
      }
 });
 
