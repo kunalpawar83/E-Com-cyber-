@@ -32,11 +32,12 @@ const router = express.Router();
 
 //  SIGNUP ROUTE
 router.post('/signup',AuthCont.signup);
-
 // login Route
 router.post('/login',AuthCont.login);
-
 // user update route
 router.put('/updateuser',jwtAuthMiddleware,UserCont.updateUser);
+// user delete route 
+router.delete('/deleteuser',jwtAuthMiddleware,UserCont.deleteUser);
+
 
 module.exports =router;

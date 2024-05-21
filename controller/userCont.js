@@ -29,3 +29,27 @@ exports.updateUser  = async(req,res)=>{
           })
     }
 };
+
+// delete use  
+exports.deleteUser  =  async(req,res)=>{
+    try{
+        const userId  = req.user.id;
+        const response  = await User.findByIdAndDelete(userId);
+        if(!response){
+            return res.status(404).json({
+                status:"fail",
+                error:"User not found"
+            })
+           }
+           res.status(200).json({
+            status:"success",
+            data:response
+        })
+ 
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+             error:'Internal server error'
+        })
+    }
+}
