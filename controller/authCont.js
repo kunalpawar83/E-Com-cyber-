@@ -54,7 +54,7 @@ exports.login = async(req,res)=>{
     
     const token  = generateToken(payload);
     await sendEmail({
-      email: response.email,
+      email: email,
       subject: 'Welcome to our website',
       message: `Thank you for registering with us! and your token is here ${token}`
     });
