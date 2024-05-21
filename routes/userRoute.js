@@ -1,7 +1,7 @@
 const express = require('express');
-const User  = require('../models/userModel.js');
-const {jwtAuthMiddleware,generateToken} = require('../utils/jwt.js');
+const {jwtAuthMiddleware} = require('../utils/jwt.js');
 const AuthCont = require('../controller/authCont.js');
+const UserCont  = require('../controller/userCont.js');
 const multer = require('multer');
 
 const multerStorage = multer.diskStorage({
@@ -36,6 +36,7 @@ router.post('/signup',AuthCont.signup);
 // login Route
 router.post('/login',AuthCont.login);
 
-router.get('/getalldata',AuthCont.getALlData);
+// user update route
+router.put('/updateuser',jwtAuthMiddleware,UserCont.updateUser);
 
 module.exports =router;

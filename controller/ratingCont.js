@@ -21,4 +21,4 @@ exports.createRating = async(req,res)=>{
         })
     }
 
-};
+} 

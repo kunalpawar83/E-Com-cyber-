@@ -1,0 +1,31 @@
+const User =  require('../models/userModel.js');
+
+
+// user update
+
+exports.updateUser  = async(req,res)=>{
+    try{
+        const userId  =  req.user.id;
+        const userData  =  req.body;
+        const response = await User.findByIdAndUpdate(userId,userData,{
+            new:true,
+            runValidators:true
+          })
+          if(!response){
+            return res.status(404).json({
+                status:"fail",
+                error:"User not found"
+            })
+           }
+           res.status(200).json({
+            status:"success",
+            data:response
+        })
+
+    }catch(err){
+        console.log(err);
+          res.status(500).json({
+               error:'Internal server error'
+          })
+    }
+};
