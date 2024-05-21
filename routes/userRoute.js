@@ -34,6 +34,8 @@ const router = express.Router();
 router.post('/signup',AuthCont.signup);
 // login Route
 router.post('/login',AuthCont.login);
+// get user route
+router.get('/getuser',jwtAuthMiddleware,UserCont.getData);
 // user update route
 router.put('/updateuser',jwtAuthMiddleware,UserCont.updateUser);
 // user delete route 
