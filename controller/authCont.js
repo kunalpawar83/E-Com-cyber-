@@ -1,6 +1,7 @@
 const User = require('../models/userModel.js');
 const {generateToken} = require('../utils/jwt.js');
 const sendEmail = require('../utils/email.js');
+const crypto = require('crypto');
 
 exports.signup = async(req,res)=>{
     try{
@@ -124,4 +125,48 @@ exports.forgetPassword = async(req,res)=>{
        error:"Internal server error"
       })
     }
-}
+};
+
+exports.resetPassword = async (req, res) => {
+    try{
+              // 1) Get user based on the token
+        const hashedToken = crypto
+        .createHash('sha256')
+        .update(req.params.token)
+        .digest('hex');
+
+        console.log(hashedToken);
+
+      const user = await User.findOne({
+        passwordResetToken: hashedToken,
+        passwordResetExpires: { $gt: Date.now() }
+      });
+
+      // 2) If token has not expired, and there is user, set the new password
+      if (!user) {
+        return res.status(400).json({
+          error:"invalid token "
+        })
+      }
+      user.password = req.body.password;
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await user.save();
+
+      // 3) Update changedPasswordAt property for the user
+      // 4) Log the user in, send JWT
+      const payload = {
+        id:user.id
+      } 
+      generateToken(payload);
+      res.status(200).json({
+        message:"done"
+      })
+    }catch(err){
+      console.log(err);
+      res.status(500).json({
+       status:"fail",
+       error:"Internal server error"
+      })
+    }
+};

@@ -44,6 +44,8 @@ router.delete('/deleteuser',jwtAuthMiddleware,UserCont.deleteUser);
 // password routes 
 // forget password  route 
 router.post('/forgetpassword',jwtAuthMiddleware,AuthCont.forgetPassword);
+// reset toekn route 
+router.patch('/resetpassword/:token',AuthCont.resetPassword);
 
 
 module.exports =router;
