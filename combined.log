@@ -41,3 +41,13 @@
 {"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:59:58.876Z"}
 {"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T06:00:00.442Z"}
 {"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T06:00:25.505Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:53:55.533Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:54:02.352Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:54:09.054Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:54:51.929Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:54:53.044Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:55:07.329Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:55:08.787Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:55:15.851Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:56:28.681Z"}
+{"level":"info","message":"POST /product/ratingproduct","timestamp":"2024-05-22T07:56:29.725Z"}

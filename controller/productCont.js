@@ -1,4 +1,7 @@
+const { promises } = require('nodemailer/lib/xoauth2/index.js');
 const {Product} = require('../models/productModel.js');
+const { startSession } = require('mongoose');
+
 
 // create product
 exports.createProduct = async(req,res)=>{
@@ -109,3 +112,31 @@ exports.deleteProduct = async(req,res)=>{
     }
 };
 
+// product rating 
+
+exports.productRating = async(req,res)=>{
+    try {
+        const { id, rating } = req.body;
+        let product = await Product.findById(id);
+    
+        for (let i = 0; i < product.rating.length; i++) {
+          if (product.rating[i].userId == req.user.id) {
+            product.rating.splice(i, 1);
+            break;
+          }
+        }
+    
+        const ratingSchema = {
+          userId: req.user,
+          rating,
+        };
+    
+        product.rating.push(ratingSchema);
+        product = await product.save();
+        res.status(201).json({
+            product
+        })
+      } catch (e) {
+        res.status(500).json({ error: e.message });
+      }
+};
