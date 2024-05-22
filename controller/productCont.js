@@ -1,5 +1,6 @@
 const {Product} = require('../models/productModel.js');
 
+// create product
 exports.createProduct = async(req,res)=>{
     try{
         //const dataFile =  req.file.path;
@@ -12,7 +13,6 @@ exports.createProduct = async(req,res)=>{
             response
         })
     }catch(err){
-        
         console.log(err);
         res.status(500).json({
             error:"internal server error"
@@ -21,6 +21,7 @@ exports.createProduct = async(req,res)=>{
 
 };
 
+// get all product 
 exports.getAllProduct = async(req, res)=>{
   try{
     const { category , name } = req.query
@@ -41,6 +42,7 @@ exports.getAllProduct = async(req, res)=>{
   }
 };
 
+// get product 
 exports.getProduct = async(req,res)=>{
     try{
         const productData = await Product.findById(req.params.id);
@@ -60,6 +62,7 @@ exports.getProduct = async(req,res)=>{
     }
 };
 
+// update product
 exports.updateProduct = async(req,res)=>{
     try{
         const productId  = req.params.id;
@@ -85,6 +88,7 @@ exports.updateProduct = async(req,res)=>{
      }
 };
 
+// delete product
 exports.deleteProduct = async(req,res)=>{
     try{
         const productData = await Product.findByIdAndDelete(req.params.id);
@@ -103,4 +107,5 @@ exports.deleteProduct = async(req,res)=>{
             error:"internal server error"
         })
     }
-}
+};
+

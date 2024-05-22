@@ -27,3 +27,17 @@
 {"level":"info","message":"PATCH /user/resetpassword/%20b9e6420ba779fb4be764c40a2e15663ef7a150f61949627b093a09373c237cce","timestamp":"2024-05-21T12:13:20.776Z"}
 {"level":"info","message":"PATCH /user/resetpassword/b9e6420ba779fb4be764c40a2e15663ef7a150f61949627b093a09373c237cce","timestamp":"2024-05-21T12:13:42.743Z"}
 {"level":"info","message":"PATCH /user/resetpassword/ff51c5e98ad61a323e96af6c810647acbe8462cf11f8f94018b6916a3a151d56","timestamp":"2024-05-22T05:20:44.380Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:50:57.548Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:51:16.320Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:51:58.249Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:53:17.199Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:53:42.390Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:54:16.096Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:54:17.018Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:55:02.927Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:55:04.683Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:55:13.173Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:57:07.997Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T05:59:58.876Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T06:00:00.442Z"}
+{"level":"info","message":"POST /product/createproduct","timestamp":"2024-05-22T06:00:25.505Z"}

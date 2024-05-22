@@ -43,7 +43,7 @@ router.delete('/deleteuser',jwtAuthMiddleware,UserCont.deleteUser);
 
 // password routes 
 // forget password  route 
-router.post('/forgetpassword',jwtAuthMiddleware,AuthCont.forgetPassword);
+router.post('/forgetpassword',AuthCont.forgetPassword);
 // reset toekn route 
 router.patch('/resetpassword/:token',AuthCont.resetPassword);
 
