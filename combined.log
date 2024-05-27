@@ -94,3 +94,9 @@
 {"level":"info","message":"PUT /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:06.032Z"}
 {"level":"info","message":"DELETE /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:10.903Z"}
 {"level":"info","message":"DELETE /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:34.350Z"}
+{"level":"info","message":"GET /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:19:49.165Z"}
+{"level":"info","message":"GET /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:25:47.339Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:26:07.496Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:26:22.640Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:26:36.261Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T10:26:59.977Z"}
