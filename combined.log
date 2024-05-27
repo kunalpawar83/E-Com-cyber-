@@ -87,3 +87,10 @@
 {"level":"info","message":"GET /product/getallproduct?laptop","timestamp":"2024-05-27T09:04:23.742Z"}
 {"level":"info","message":"GET /product/getallproduct?laptop","timestamp":"2024-05-27T09:05:16.297Z"}
 {"level":"info","message":"GET /product/getallproduct?mobile","timestamp":"2024-05-27T09:06:06.626Z"}
+{"level":"info","message":"GET /product/getproduct/67678686","timestamp":"2024-05-27T09:20:37.841Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:27:07.041Z"}
+{"level":"info","message":"GET /product/getproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:27:43.604Z"}
+{"level":"info","message":"PUT /product/updateproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:28:54.926Z"}
+{"level":"info","message":"PUT /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:06.032Z"}
+{"level":"info","message":"DELETE /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:10.903Z"}
+{"level":"info","message":"DELETE /product/deleteproduct/6645bbbb0cd3ebbeebd8b3c0","timestamp":"2024-05-27T09:29:34.350Z"}

@@ -1,9 +1,9 @@
 const Category = require('../models/categoryModel.js');
+const catchAsync = require('../utils/catchAsync.js');
+const appError = require('../utils/appError.js');
 
 // create category
-exports.createCategory = async(req,res)=>{
-
-    try{
+exports.createCategory = catchAsync(async(req,res,next)=>{
         const categoryData = req.body;
         const newCategory = Category(categoryData);
         const Data = await newCategory.save();
@@ -11,24 +11,11 @@ exports.createCategory = async(req,res)=>{
         res.status(201).json({
             Data
         })
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            error:"internal server error"
-        })
-    }
-};
+});
 
-exports.getAllCategory = async(req,res)=>{
-    try{
-        const categoryData = await Category.find();
-        res.status(200).json({
-            categoryData
-        })
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            error:"internal server error"
-        })
-    }
-}
+exports.getAllCategory = catchAsync(async(req,res,next)=>{
+    const categoryData = await Category.find();
+    res.status(200).json({
+        categoryData
+    })
+});

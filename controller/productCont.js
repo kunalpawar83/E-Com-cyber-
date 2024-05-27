@@ -2,6 +2,7 @@ const { promises } = require('nodemailer/lib/xoauth2/index.js');
 const {Product} = require('../models/productModel.js');
 const { startSession } = require('mongoose');
 const catchAsync = require('../utils/catchAsync.js');
+const appError = require('../utils/appError.js');
 // create product
 exports.createProduct = catchAsync(async(req,res,next)=>{
      //const dataFile =  req.file.path;
@@ -33,9 +34,7 @@ exports.getAllProduct = catchAsync(async(req, res,next)=>{
 exports.getProduct = catchAsync(async(req,res,next)=>{
         const productData = await Product.findById(req.params.id);
         if(!productData){
-            res.status(404).json({
-                error:"product not found with that id , Please send valid id"
-            })
+           return next(new appError('product not found with that id',404))
         };
         res.status(200).json({
             productData
@@ -52,9 +51,7 @@ exports.updateProduct = catchAsync(async(req,res,next)=>{
           runValidators:true
         })
         if(!response){
-         return res.status(404).json({
-             error:"product not found with that id , Please send valid id"
-         })
+            return next(new appError('product not found with that id',404))
         }
         res.status(200).json({
          data:response
@@ -62,12 +59,10 @@ exports.updateProduct = catchAsync(async(req,res,next)=>{
 });
 
 // delete product
-exports.deleteProduct = catchAsync(async(req,res)=>{
+exports.deleteProduct = catchAsync(async(req,res,next)=>{
         const productData = await Product.findByIdAndDelete(req.params.id);
         if(!productData){
-            res.status(404).json({
-                error:"product not found with that id "
-            })
+            return next(new appError('product not found with that id',404))
         }
         res.status(200).json({
             message:"done"

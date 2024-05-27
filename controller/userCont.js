@@ -1,84 +1,52 @@
 const { assertEnabled } = require('firebase-tools/lib/experiments.js');
 const User =  require('../models/userModel.js');
-
+const catchAsync = require('../utils/catchAsync.js');
+const appError = require('../utils/appError.js');
 
 
 //  get user data 
-exports.getData  = async(req,res)=>{
-    try{
+exports.getData  = catchAsync(async(req,res,next)=>{
         const userData  =   await User.findById(req.user.id);
         if(!userData){
-            return res.status(404).json({
-                status:"fail",
-                error:"User not found"
-            })
-           }
-           res.status(200).json({
+            return next(new appError('User not found with that Id !',404))
+        }
+        res.status(200).json({
             status:"success",
             data:userData
         })
-
-    }catch(err){
-        console.log(err);
-          res.status(500).json({
-               error:'Internal server error'
-          })
-    }
-}
+});
 
 
 
 // user update
-exports.updateUser  = async(req,res)=>{
-    try{
+exports.updateUser  = catchAsync(async(req,res,next)=>{
         const userId  =  req.user.id;
         const userData  =  req.body;
         const response = await User.findByIdAndUpdate(userId,userData,{
             new:true,
             runValidators:true
           })
-          if(!response){
-            return res.status(404).json({
-                status:"fail",
-                error:"User not found"
-            })
-           }
-           res.status(200).json({
+        if(!response){
+           return next(new appError('User not found with that Id !',404))
+        }
+        res.status(200).json({
             status:"success",
             data:response
         })
-
-    }catch(err){
-        console.log(err);
-          res.status(500).json({
-               error:'Internal server error'
-          })
-    }
-};
+});
 
 // delete use  
-exports.deleteUser  =  async(req,res)=>{
-    try{
+exports.deleteUser  =  catchAsync(async(req,res,next)=>{
         const userId  = req.user.id;
         const response  = await User.findByIdAndDelete(userId);
         if(!response){
-            return res.status(404).json({
-                status:"fail",
-                error:"User not found"
-            })
-           }
-           res.status(200).json({
+            return next(new appError('User not found with that Id !',404))
+        }
+        res.status(200).json({
             status:"success",
             data:response
         })
- 
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-             error:'Internal server error'
-        })
-    }
-};
+});
 
 
 

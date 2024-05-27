@@ -2,9 +2,10 @@ const User = require('../models/userModel.js');
 const {generateToken} = require('../utils/jwt.js');
 const sendEmail = require('../utils/email.js');
 const crypto = require('crypto');
+const catchAsync = require('../utils/catchAsync.js');
+const appError = require('../utils/appError.js');
 
-exports.signup = async(req,res)=>{
-    try{
+exports.signup = catchAsync(async(req,res,next)=>{
     //const dataFile =  req.file.path;
      let data = req.body;
      //data.photo = dataFile;
@@ -27,26 +28,15 @@ exports.signup = async(req,res)=>{
        token:token,
        response
        });
+});
 
-    }catch(err){
-      console.log(err);
-      res.status(500).json({
-          error:"internal server Error"
-       })
-    }
-}
-
-exports.login = async(req,res)=>{
-   try{
+exports.login =  catchAsync(async(req,res,next)=>{
      const {email, password} = req.body;
      const user  = await User.findOne({email:email});
 
      // if email does not exist or pasword does not match , return error 
      if(!user || !(await user.comparePassword(password))){
-       return res.status(400).json({
-          status:"fail",
-          error:"Invalid  email or password"
-       })
+       return next( new appError('Incorrect email or password',401))
      }
      
      const payload = {
@@ -63,35 +53,18 @@ exports.login = async(req,res)=>{
           status:"success",
           token:token
      })
-
-   }catch(err){
-       console.log(err);
-      res.status(500).json({
-       status:"fail",
-       error:"Internal server error"
-      })
-   }
-};
+});
 
 
 
 
-exports.getALlData = async(req,res)=>{
-     try{
+exports.getALlData = catchAsync(async(req,res,next)=>{
        const userData  = await User.find();
 
        req.status(200).json({
          userData
        })
-
-     }catch(err){
-      console.log(err);
-      res.status(500).json({
-       status:"fail",
-       error:"Internal server error"
-      })
-     }
-}
+})
 // forget passwordd  
 exports.forgetPassword = async(req,res)=>{
       // 1) Get user based on POSTed email
@@ -127,9 +100,8 @@ exports.forgetPassword = async(req,res)=>{
     }
 };
 
-exports.resetPassword = async (req, res) => {
-    try{
-              // 1) Get user based on the token
+exports.resetPassword = catchAsync(async(req, res,next) => {
+      // 1) Get user based on the token
         const hashedToken = crypto
         .createHash('sha256')
         .update(req.params.token)
@@ -144,9 +116,7 @@ exports.resetPassword = async (req, res) => {
 
       // 2) If token has not expired, and there is user, set the new password
       if (!user) {
-        return res.status(400).json({
-          error:"invalid token "
-        })
+         return next(new appError('Token is invalid or has expired', 400));
       }
       user.password = req.body.password;
       user.passwordResetToken = undefined;
@@ -162,11 +132,4 @@ exports.resetPassword = async (req, res) => {
       res.status(200).json({
         message:"done"
       })
-    }catch(err){
-      console.log(err);
-      res.status(500).json({
-       status:"fail",
-       error:"Internal server error"
-      })
-    }
-};
+});
