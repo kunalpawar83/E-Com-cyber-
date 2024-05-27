@@ -7,11 +7,11 @@ const crypto = require('crypto');
 const userSc = new mongoose.Schema({
      userName:{
          type:String,
-         required:true
+         required:[true,'Please enter your name']
      },
      email:{
         type:String,
-        required:true,
+        required:[true,'A user must have email'],
         unique:true,
         lowercase:true,
         validate:[validator.isEmail,'Please provide valid email']
@@ -19,12 +19,12 @@ const userSc = new mongoose.Schema({
      photo: String,
      password:{
         type:String,
-        required:true,
+        required:[true,' A user must have password'],
 
      },
      mobile:{
       type:String,
-      required:true
+      required:[true,' A user must have mobile number'],
      },
      address: {
       type: String,
@@ -35,7 +35,7 @@ const userSc = new mongoose.Schema({
         product: productSc,
         quantity: {
           type: Number,
-          required: true,
+          required:[true,'Product must have quantity'],
         },
       },
     ],

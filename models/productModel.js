@@ -5,29 +5,29 @@ const ratingSc  =  require('./ratingModel.js');
 const productSc =  new mongoose.Schema({
     name:{
         type:String,
-        required:true,
+        required:[true,'Product must have name'],
         trim:true
     },
     description:{
         type:String,
-        required:true,
+        required:[true,'Product must have description'],
         trim:true
     },
     image:{
             type:String,
-            required:true
+            required:[true,'Product must have image']
     },
     quantity:{
         type:Number,
-        required:true
+        required:[true,'Product must have quantity']
     },
     price:{
         type:String,
-        required:true
+        required:[true,'Product must have price']
     },
     category:{
         type:String,
-        required:true
+        required:[true,'Product must have category']
     },
     ratings:[ ratingSc ]
 });
