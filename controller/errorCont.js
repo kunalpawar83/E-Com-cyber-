@@ -1,3 +1,5 @@
+const { error } = require("winston");
+
 const senderrordev =(err,res)=>{
     res.status(err.statusCode).json({
         status:err.status,
@@ -8,10 +10,18 @@ const senderrordev =(err,res)=>{
 };
 
 const senderrorprod = (err,res)=>{
-    res.status(err.statusCode).json({
-        status:err.status,
-        message:err.message
-       })
+    if(err.isOperational){
+        res.status(err.statusCode).json({
+            status:err.status,
+            message:err.message
+           })
+    }else{
+        console.error("---------------------------------",err)
+        res.status(500).json({
+            status:"error",
+            message:"something went very wrong" 
+        })
+    }
 }
 
 module.exports = (err,req,res,next)=>{

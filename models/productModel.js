@@ -11,7 +11,10 @@ const productSc =  new mongoose.Schema({
     description:{
         type:String,
         required:[true,'Product must have description'],
-        trim:true
+        trim:true,
+        min:[3,'Description must be at least 3 characters'],
+        max:[1000,'Description must be less than 1000 characters']
+
     },
     image:{
             type:String,

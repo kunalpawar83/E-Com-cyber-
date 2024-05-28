@@ -7,7 +7,9 @@ const ratingSc =  new mongoose.Schema({
     },
     rating:{
         type:Number,
-        required:[true,'Product must have rating']
+        required:[true,'Product must have rating'],
+        min:[1,'Rating must be above 1'],
+        max:[5,'Rating must be below 5']
     }
 });
 
