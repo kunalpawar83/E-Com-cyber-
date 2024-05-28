@@ -7,7 +7,10 @@ const crypto = require('crypto');
 const userSc = new mongoose.Schema({
      userName:{
          type:String,
-         required:[true,'Please enter your name']
+         required:[true,'Please enter your name'],
+         trim:true,
+         maxlength:[20,'Name must be less than 20 characters'],
+         minlength:[3,'Name must be at least 3 characters']
      },
      email:{
         type:String,
@@ -20,11 +23,12 @@ const userSc = new mongoose.Schema({
      password:{
         type:String,
         required:[true,' A user must have password'],
-
+        minlength:[8,'Password must be at least 8 characters']
      },
      mobile:{
       type:String,
       required:[true,' A user must have mobile number'],
+      maxlength:[13,'Mobile number must be 10 characters']
      },
      address: {
       type: String,
