@@ -71,13 +71,12 @@ exports.deleteProduct = catchAsync(async(req,res,next)=>{
 
 //product rating 
 
-exports.productRating = async(req,res)=>{
-    try {
+exports.productRating = catchAsync(async(req,res,next)=>{
         const { id, rating } = req.body;
         let product = await Product.findById(id);
     
         for (let i = 0; i < product.rating.length; i++) {
-          if (product.rating[i].userId == req.user.id) {
+          if (product.rating[i].userId == req.user) {
             product.rating.splice(i, 1);
             break;
           }
@@ -93,7 +92,4 @@ exports.productRating = async(req,res)=>{
         res.status(201).json({
             product
         })
-      } catch (e) {
-        res.status(500).json({ error: e.message });
-      }
-};
+});
