@@ -28,6 +28,7 @@ const userSc = new mongoose.Schema({
      mobile:{
       type:String,
       required:[true,' A user must have mobile number'],
+      minlength:[10,'Mobile number must be 10 characters'],
       maxlength:[13,'Mobile number must be 10 characters']
      },
      address: {
