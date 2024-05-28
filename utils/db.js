@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
+const catchAsync = require("./catchAsync.js");
+const apperror = require("./appError.js");
 
 const connectDB = async () => {
-  try {
-    await mongoose.connect('mongodb+srv://kunalpawarcyberinstant:kunalmain2018@cluster0.8g5x7yn.mongodb.net/user?retryWrites=true&w=majority');
-    console.log("MongoDB connected");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-  }
+
+    await mongoose.connect('mongodb+srv://kunalpawarcyberinstant:kunalmain208@cluster0.8g5x7yn.mongodb.net/user?retryWrites=true&w=majority')
+    .then(() => console.log("MongoDB connected"))
 };
 
 

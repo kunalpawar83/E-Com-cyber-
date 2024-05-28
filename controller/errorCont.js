@@ -19,6 +19,11 @@ const handleValidationErrorDB = (err)=>{
     const message = `Invalid input! ${errors.join('. ')}`;
     return new appError(message,400);
 };
+// handle json web token error
+const handleJsonWebTokenError = (err)=>{
+    const message = `Invalid token. Please login again!`;
+    return new appError(message,401);
+};
 
 // handle dev error
 const senderrordev =(err,res)=>{
@@ -56,6 +61,7 @@ module.exports = (err,req,res,next)=>{
         if(err.name === 'CastError')err = handleCastErrorDB(err);
         if(err.code === 11000)err = handleDuplicateErrorDB(err);
         if(err.name === 'ValidationError')err = handleValidationErrorDB(err);
+        if(err.name === 'JsonWebTokenError')err = handleJsonWebTokenError(err);
         senderrorprod(err,res);
     }
 }

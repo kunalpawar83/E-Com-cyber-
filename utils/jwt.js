@@ -1,31 +1,20 @@
 const jwt = require('jsonwebtoken');
 const key = "kunal_29/06/2003"
+const catchAsync = require('./catchAsync.js');
+const appError = require('./appError.js');
 
 
 
-const jwtAuthMiddleware  = ( req,res,next)=>{
-    try{
+const jwtAuthMiddleware  = catchAsync(( req,res,next)=>{
+
         const token  =  req.headers.authorization.split(" ")[1] ;
         if(!token){
-         return res.status(403).json({
-            status:"fail",
-            error:"unauthorized"
-         })
+            return next(new appError('unauthorized',401));
         }
-
         const decoded = jwt.verify(token,key);
         req.user = decoded;
         next();
-
-    }catch(err){
-        console.log(err);
-        res.status(400).json({
-            status:"fail",
-            error:"Invalid token"
-        })
-                   
-    }
-};
+});
 
 
 const generateToken = (userdata)=>{
