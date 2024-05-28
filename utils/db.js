@@ -4,7 +4,7 @@ const apperror = require("./appError.js");
 
 const connectDB = async () => {
 
-    await mongoose.connect('mongodb+srv://kunalpawarcyberinstant:kunalmain208@cluster0.8g5x7yn.mongodb.net/user?retryWrites=true&w=majority')
+    await mongoose.connect('mongodb+srv://kunalpawarcyberinstant:kunalmain2018@cluster0.8g5x7yn.mongodb.net/user?retryWrites=true&w=majority')
     .then(() => console.log("MongoDB connected"))
 };
 
