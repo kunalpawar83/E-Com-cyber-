@@ -1,6 +1,5 @@
 const mongoose  = require('mongoose');
-const ratingSc  =  require('./ratingModel.js');
-
+const Schema = mongoose.Schema;
 
 const productSc =  new mongoose.Schema({
     name:{
@@ -32,11 +31,11 @@ const productSc =  new mongoose.Schema({
         type:String,
         required:[true,'Product must have category']
     },
-    ratings:[ ratingSc ]
+    ratings:[{ type: Schema.Types.ObjectId, ref: 'Rating' }]
 });
 
 const Product = new mongoose.model('Product',productSc);
-module.exports = {Product ,productSc };
+module.exports = {Product,productSc};
 
 
 

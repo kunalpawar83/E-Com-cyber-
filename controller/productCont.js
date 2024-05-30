@@ -3,9 +3,11 @@ const {Product} = require('../models/productModel.js');
 const { startSession } = require('mongoose');
 const catchAsync = require('../utils/catchAsync.js');
 const appError = require('../utils/appError.js');
+const Rating = require('../models/ratingModel.js');
+
 // create product
 exports.createProduct = catchAsync(async(req,res,next)=>{
-     //const dataFile =  req.file.path;
+        //const dataFile =  req.file.path;
         //req.body.image = dataFile;
         const userData = req.body;
         const newUser = Product(userData);
@@ -34,7 +36,7 @@ exports.getAllProduct = catchAsync(async(req, res,next)=>{
 exports.getProduct = catchAsync(async(req,res,next)=>{
         const productData = await Product.findById(req.params.id);
         if(!productData){
-           return next(new appError('product not found with that id',404))
+           return next(new appError('product not found!',404))
         };
         res.status(200).json({
             productData
@@ -51,7 +53,7 @@ exports.updateProduct = catchAsync(async(req,res,next)=>{
           runValidators:true
         })
         if(!response){
-            return next(new appError('product not found with that id',404))
+            return next(new appError('product not found!',404))
         }
         res.status(200).json({
          data:response
@@ -62,34 +64,21 @@ exports.updateProduct = catchAsync(async(req,res,next)=>{
 exports.deleteProduct = catchAsync(async(req,res,next)=>{
         const productData = await Product.findByIdAndDelete(req.params.id);
         if(!productData){
-            return next(new appError('product not found with that id',404))
+            return next(new appError('product not found!',404))
         }
         res.status(200).json({
             message:"done"
         })
 });
 
-//product rating 
 
-exports.productRating = catchAsync(async(req,res,next)=>{
-        const { id, rating } = req.body;
-        let product = await Product.findById(id);
-    
-        for (let i = 0; i < product.rating.length; i++) {
-          if (product.rating[i].userId == req.user) {
-            product.rating.splice(i, 1);
-            break;
-          }
-        }
-    
-        const ratingSchema = {
-          userId: req.user,
-          rating,
-        };
-    
-        product.rating.push(ratingSchema);
-        product = await product.save();
-        res.status(201).json({
-            product
-        })
-});
+// product rating
+exports.ratingProduct = catchAsync(async(req,res,next)=>{
+    const { user, rating, review, productId } = req.body;
+    const newRating = new Rating({ user, rating, review, productId });
+    newRating.user =  req.user.id;
+    newRating.productId = req.params.id;
+    await newRating.save();
+
+    res.status(201).json(newRating);
+})

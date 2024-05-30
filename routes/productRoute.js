@@ -43,8 +43,8 @@ router.delete('/deleteproduct/:id',Prodcut.deleteProduct);
 
 
 /////////////////////////////////////////////////////////////////////////
-// rating of product 
-router.post('/ratingproduct',jwtAuthMiddleware,Prodcut.productRating);
+// rating of product
+router.post('/ratingproduct/:id',jwtAuthMiddleware,Prodcut.ratingProduct);
 
 
 module.exports = router;
