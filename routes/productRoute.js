@@ -45,6 +45,8 @@ router.delete('/deleteproduct/:id',Prodcut.deleteProduct);
 /////////////////////////////////////////////////////////////////////////
 // rating of product
 router.post('/ratingproduct/:id',jwtAuthMiddleware,Prodcut.ratingProduct);
+// rating product
+router.get('/getallrating/:id',jwtAuthMiddleware,Prodcut.getaAllRating);
 
 
 module.exports = router;

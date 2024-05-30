@@ -81,4 +81,15 @@ exports.ratingProduct = catchAsync(async(req,res,next)=>{
     await newRating.save();
 
     res.status(201).json(newRating);
-})
+});
+
+exports.getaAllRating = catchAsync(async(req,res,next)=>{
+    const productId = req.params.id;
+    const ratingData = await Rating.find({ productId });
+    if(!ratingData){
+        return next(new appError('rating not found!',404)) 
+    }
+    res.status(200).json({
+        ratingData
+    })
+});
