@@ -47,5 +47,14 @@ router.post('/forgetpassword',AuthCont.forgetPassword);
 // reset toekn route 
 router.patch('/resetpassword/:token',AuthCont.resetPassword);
 
+// add to cart 
+router.post('/addtocart/:id',jwtAuthMiddleware,UserCont.addToCart);
+
+// get cart
+router.get('/getcart',jwtAuthMiddleware,UserCont.getCart);
+
+// remove from cart
+router.delete('/removefromcart/:id',jwtAuthMiddleware,UserCont.removeFromCart);
+
 
 module.exports =router;
