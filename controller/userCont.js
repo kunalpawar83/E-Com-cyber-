@@ -53,43 +53,9 @@ exports.deleteUser  =  catchAsync(async(req,res,next)=>{
 
 // add to cart 
 exports.addToCart = catchAsync(async(req,res,next)=>{
-        const userId = req.user.id;
-        const productId = req.params.id;
-        const productData = await Product.findById(productId);
-        if(!productData){
-            return next(new appError('Product not found with that Id !',404))
-        }
-        const cartData = await Cart.findOne({userId:userId});
-        if(!cartData){
-            const newCart = new Cart({
-                userId:userId,
-                products:[{
-                    productId:productId,
-                    quantity:1,
-                    price:productData.price 
-                }]                  
-            });
-            const response = await newCart.save();
-            res.status(201).json({
-                status:"success",
-                data:response
-            })
-        }
-        else{
-            const response = await Cart.findOneAndUpdate({userId:userId},{
-                $push:{ 
-                    products:{
-                        productId:productId,
-                        quantity:1,
-                        price:productData.price
-                    }
-                }   
-            });
-            res.status(201).json({  
-                status:"success",
-                data:response
-            })
-        }   
+    const cartItem = new Cart({quantity:req.body.quantity,productId:req.params.id,userId:req.user.id});
+    await cartItem.save();
+    res.status(201).send(cartItem);
 });
 
 // remove from cart
@@ -116,14 +82,14 @@ exports.removeFromCart = catchAsync(async(req,res,next)=>{
 
 // get cart
 exports.getCart = catchAsync(async(req,res,next)=>{
-    const userId = req.user.id;
-    const cartData = await Cart.findOne({userId:userId});
-    if(!cartData){
+    const cartItems = await Cart.find({ userId:req.user.id }).populate('productId');
+    console.log(cartItems);
+    if(!cartItems){
         return next(new appError('Cart not found with that Id !',404))
     }
     res.status(201).json({  
         status:"success",
-        data:cartData
+        data:cartItems
     })
 });
 
