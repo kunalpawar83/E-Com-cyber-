@@ -391,3 +391,5 @@
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:31:04.994Z"}
 {"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T09:31:09.665Z"}
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:31:12.180Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:43:48.821Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:44:41.520Z"}

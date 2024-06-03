@@ -87,6 +87,7 @@ exports.getCart = catchAsync(async(req,res,next)=>{
     if(!cartItems){
         return next(new appError('Cart not found with that Id !',404))
     }
+    console.log(cartItems);
     res.status(201).json({  
         status:"success",
         data:cartItems
