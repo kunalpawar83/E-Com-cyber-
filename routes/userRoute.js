@@ -51,7 +51,7 @@ router.patch('/resetpassword/:token',AuthCont.resetPassword);
 router.post('/addtocart/:id',jwtAuthMiddleware,UserCont.addToCart);
 
 // get cart
-router.get('/getcart/:id',jwtAuthMiddleware,UserCont.getCart);
+router.get('/getcart',jwtAuthMiddleware,UserCont.getCart);
 
 // remove from cart
 router.delete('/removefromcart/:id',jwtAuthMiddleware,UserCont.removeFromCart);
