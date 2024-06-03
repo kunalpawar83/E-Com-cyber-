@@ -4,6 +4,7 @@ const {Product} = require('../models/productModel.js');
 const catchAsync = require('../utils/catchAsync.js');
 const Cart = require('../models/cartModel.js');
 const appError = require('../utils/appError.js');
+const Wishlist = require('../models/wishlistModel.js');
 
 
 //  get user data 
@@ -124,4 +125,17 @@ exports.getCart = catchAsync(async(req,res,next)=>{
         status:"success",
         data:cartData
     })
+});
+
+// wishlist
+
+exports.addToWishlist = catchAsync(async(req,res,next)=>{ 
+    const { user, product} = req.body;
+    const newWishlist = new Wishlist({ user,product });
+    newWishlist.user =  req.user.id;
+    newWishlist.product = req.params.id;
+    await newWishlist.save();
+
+    res.status(201).json(newWishlist);
+
 });

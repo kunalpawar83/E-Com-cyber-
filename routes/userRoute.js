@@ -51,10 +51,15 @@ router.patch('/resetpassword/:token',AuthCont.resetPassword);
 router.post('/addtocart/:id',jwtAuthMiddleware,UserCont.addToCart);
 
 // get cart
-router.get('/getcart',jwtAuthMiddleware,UserCont.getCart);
+router.get('/getcart/:id',jwtAuthMiddleware,UserCont.getCart);
 
 // remove from cart
 router.delete('/removefromcart/:id',jwtAuthMiddleware,UserCont.removeFromCart);
+
+// wishlist
+router.post('/addtowishlist/:id',jwtAuthMiddleware,UserCont.addToWishlist);
+//router.get('/getwishlist',jwtAuthMiddleware,UserCont.getWishlist);
+//router.delete('/removewishlist/:id',jwtAuthMiddleware,UserCont.removeWishlist);
 
 
 module.exports =router;
