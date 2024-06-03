@@ -393,3 +393,11 @@
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:31:12.180Z"}
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:43:48.821Z"}
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:44:41.520Z"}
+{"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T09:48:43.624Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:49:03.945Z"}
+{"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T09:51:34.360Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:51:36.899Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:52:12.118Z"}
+{"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T09:52:19.199Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:52:21.927Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:53:23.431Z"}

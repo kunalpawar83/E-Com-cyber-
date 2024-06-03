@@ -90,7 +90,7 @@ exports.getCart = catchAsync(async(req,res,next)=>{
     console.log(cartItems);
     res.status(201).json({  
         status:"success",
-        data:cartItems
+        cartItems
     })
 });
 
