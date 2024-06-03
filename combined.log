@@ -401,3 +401,4 @@
 {"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T09:52:19.199Z"}
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:52:21.927Z"}
 {"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T09:53:23.431Z"}
+{"level":"info","message":"GET /user/getcart","timestamp":"2024-06-03T10:00:43.651Z"}
