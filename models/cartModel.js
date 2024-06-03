@@ -24,12 +24,12 @@ const CartSchema = new mongoose.Schema({
     ]
 });
 
-CartSchema.pre('save', async function(next) {
-    const product = this.products[0].productId[0].map(async id => await Product.findById(id));
-    this.products[0].productId[0]  = await Promise.all(product);
-    console.log(products[0].productId[0]);
-    next();
-});
+// CartSchema.pre('save', async function(next) {
+//     const product = this.products[0].productId[0].map(async id => await Product.findById(id));
+//     this.products[0].productId[0]  = await Promise.all(product);
+//     console.log(products[0].productId[0]);
+//     next();
+// });
 
 const Cart  = new mongoose.model('Cart', CartSchema);
 module.exports = Cart;

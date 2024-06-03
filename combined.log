@@ -368,3 +368,5 @@
 {"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T06:10:39.982Z"}
 {"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T06:10:44.288Z"}
 {"level":"info","message":"GET /user/getcart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T06:12:36.950Z"}
+{"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T06:28:43.836Z"}
+{"level":"info","message":"POST /user/addtocart/6645bbbb0cd3ebbeebd8b3c4","timestamp":"2024-06-03T06:29:07.486Z"}
