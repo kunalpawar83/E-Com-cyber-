@@ -13,16 +13,13 @@ exports.signup = catchAsync(async(req,res,next)=>{
      const response = await newUser.save();
       const payload = {
          id:response.id
-      } 
-      
+      }
       const token  = generateToken(payload);
-      sendEmail(response.email,'Welcome to our website', `Thank you for registering with us! and your token is here ${token}`);
       await sendEmail({
-         email: response.email,
-         subject: 'Welcome to our website',
-         message: `Thank you for registering with us! and your token is here ${token}`
-       });
-   
+        email: response.email, 
+        subject: 'Welcome to our website',
+        message: `Thank you for registering with us! and your token is here ${token}`
+      });   
        res.status(201).json({
        status:"success",
        token:token,
@@ -45,7 +42,7 @@ exports.login =  catchAsync(async(req,res,next)=>{
     
     const token  = generateToken(payload);
     await sendEmail({
-      email: email,
+      email: email, 
       subject: 'Welcome to our website',
       message: `Thank you for registering with us! and your token is here ${token}`
     });

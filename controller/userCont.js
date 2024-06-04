@@ -53,9 +53,45 @@ exports.deleteUser  =  catchAsync(async(req,res,next)=>{
 
 // add to cart 
 exports.addToCart = catchAsync(async(req,res,next)=>{
-    const cartItem = new Cart({quantity:req.body.quantity,productId:req.params.id,userId:req.user.id});
-    await cartItem.save();
-    res.status(201).send(cartItem);
+    const userId = req.user.id
+    console.log(userId)
+    if (!userId){
+        res.status(400)
+        throw new Error('No such user Found')
+    }
+    // console.log(userId);
+    const userAvailable = await User?.findById(userId)
+    if(!userAvailable){
+        return res.status(400).send({ status: false, message: "Invalid user" });
+    }
+    let {productId, quantity, title, price, image} = req.body
+        if (!productId){
+            return res.status(400).send({ status: false, message: "Invalid product" });
+        }
+    let productAvailable = await Product?.findOne({_id: req.body.productId});
+    let cart = await Cart.findOne({ userId: userId });
+        if (cart) {
+            let itemIndex = cart.products.findIndex((p) => p.productId == productId);
+                if (itemIndex > -1) {
+                    let productItem = cart.products[itemIndex];
+                    productItem.quantity += quantity;
+                    if(cart.total === 0){
+                        cart.total = productItem.price;
+                    }
+                    cart.total += quantity * productItem.price;
+                    cart.products[itemIndex] = productItem;
+                } else {
+                    await cart.products.push({ productId: productId, quantity: quantity, title: title, image: image, price: price });
+                }
+            cart = await cart.save();
+            return res.status(200).send({ status: true, updatedCart: cart });
+        } else {
+            let  newCart = await Cart.create({
+            userId,
+            products: [{ productId: productId, quantity: quantity, title: title, image: image, price: price }],
+     });
+     return res.status(201).send({ status: true, newCart:newCart });
+    }
 });
 
 // remove from cart
@@ -82,16 +118,21 @@ exports.removeFromCart = catchAsync(async(req,res,next)=>{
 
 // get cart
 exports.getCart = catchAsync(async(req,res,next)=>{
-    const cartItems = await Cart.find({ userId:req.user.id }).populate('productId');
-    console.log(cartItems);
-    if(!cartItems){
-        return next(new appError('Cart not found with that Id !',404))
+    const userId = req.user.id
+    if (!userId){
+        res.status(400)
+        throw new Error('No such user Found')
     }
-    console.log(cartItems);
-    res.status(201).json({  
-        status:"success",
-        cartItems
-    })
+    const userAvailable = await User?.findById(userId);
+    let cart = await Cart.findOne({ userId: userId });
+    if (!cart)
+      return res
+        .status(404)
+        .send({ status: false, message: "Cart not found for this user" });
+    // console.log(cart.products.length);
+    cartCount = cart.products.length
+  
+    res.status(200).send({ status: true, cart: cart, cartCount: cartCount });
 });
 
 // wishlist

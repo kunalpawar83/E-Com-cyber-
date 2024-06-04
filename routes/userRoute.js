@@ -48,7 +48,7 @@ router.post('/forgetpassword',AuthCont.forgetPassword);
 router.patch('/resetpassword/:token',AuthCont.resetPassword);
 
 // add to cart 
-router.post('/addtocart/:id',jwtAuthMiddleware,UserCont.addToCart);
+router.post('/addtocart',jwtAuthMiddleware,UserCont.addToCart);
 
 // get cart
 router.get('/getcart',jwtAuthMiddleware,UserCont.getCart);
