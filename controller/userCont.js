@@ -56,8 +56,7 @@ exports.addToCart = catchAsync(async(req,res,next)=>{
     const userId = req.user.id
     console.log(userId)
     if (!userId){
-        res.status(400)
-        throw new Error('No such user Found')
+        return next(new appError('No such user Found',400))
     }
     // console.log(userId);
     const userAvailable = await User?.findById(userId)
