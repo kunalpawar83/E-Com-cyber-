@@ -77,7 +77,7 @@ exports.addToCart = catchAsync(async(req,res,next)=>{
                     if(cart.total === 0){
                         cart.total = productItem.price;
                     }
-                    cart.total += quantity * productItem.price;
+                    cart.total += quantity * productItem.price*1;
                     cart.products[itemIndex] = productItem;
                 } else {
                     await cart.products.push({ productId: productId, quantity: quantity, title: title, image: image, price: price });
