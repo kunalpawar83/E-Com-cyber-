@@ -54,7 +54,6 @@ exports.deleteUser  =  catchAsync(async(req,res,next)=>{
 // add to cart 
 exports.addToCart = catchAsync(async(req,res,next)=>{
     const userId = req.user.id
-    console.log(userId)
     if (!userId){
         return next(new appError('No such user Found',400))
     }
@@ -73,23 +72,24 @@ exports.addToCart = catchAsync(async(req,res,next)=>{
             let itemIndex = cart.products.findIndex((p) => p.productId == productId);
                 if (itemIndex > -1) {
                     let productItem = cart.products[itemIndex];
-                    productItem.quantity += quantity;
+                    productItem.quantity += quantity; // Update quantity
                     if(cart.total === 0){
                         cart.total = productItem.price;
                     }
-                    cart.total += quantity * productItem.price*1;
+                    productItem.price = price; // Update price
+                    cart.total += quantity * price; // Update total
                     cart.products[itemIndex] = productItem;
                 } else {
-                    await cart.products.push({ productId: productId, quantity: quantity, title: title, image: image, price: price });
+                    await cart.products.push({productId:productId,quantity:quantity,title:title,image:image,price:price});
                 }
             cart = await cart.save();
             return res.status(200).send({ status: true, updatedCart: cart });
         } else {
             let  newCart = await Cart.create({
             userId,
-            products: [{ productId: productId, quantity: quantity, title: title, image: image, price: price }],
+            products: [{ productId:productId,quantity:quantity,title:title,image:image,price:price}],
      });
-     return res.status(201).send({ status: true, newCart:newCart });
+            return res.status(201).send({ status: true, newCart:newCart });
     }
 });
 
@@ -137,12 +137,19 @@ exports.getCart = catchAsync(async(req,res,next)=>{
 // wishlist
 
 exports.addToWishlist = catchAsync(async(req,res,next)=>{ 
-    const { user, product} = req.body;
-    const newWishlist = new Wishlist({ user,product });
-    newWishlist.user =  req.user.id;
-    newWishlist.product = req.params.id;
+    const newWishlist = new Wishlist({ user: req.user.id,product:req.params.id});
     await newWishlist.save();
-
     res.status(201).json(newWishlist);
+});
 
+exports.getaAllWishlist = catchAsync(async(req,res,next)=>{
+    const user = req.user.id
+    const wishData = await Wishlist.find({ user});
+    console.log(wishData);
+    if(!wishData){
+        return next(new appError('rating not found!',404)) 
+    }
+    res.status(200).json({
+        wishData
+    })
 });
