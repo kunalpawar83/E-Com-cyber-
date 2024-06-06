@@ -139,7 +139,7 @@ exports.getCart = catchAsync(async(req,res,next)=>{
 exports.addToWishlist = catchAsync(async(req,res,next)=>{ 
         // Validate user ID and product ID
         const userId = req.user.id;
-        const productId = req.body.productId;
+        const productId = req.params.id;
       
         if (!userId) {
           return next(new appError('No such user found', 400));
