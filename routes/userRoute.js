@@ -58,7 +58,7 @@ router.delete('/removefromcart/:id',jwtAuthMiddleware,UserCont.removeFromCart);
 
 // wishlist
 router.post('/addtowishlist/:id',jwtAuthMiddleware,UserCont.addToWishlist);
-router.get('/getwishlist/:id',jwtAuthMiddleware,UserCont.getaAllWishlist);
+router.get('/getwishlist',jwtAuthMiddleware,UserCont.getaAllWishlist);
 //router.delete('/removewishlist/:id',jwtAuthMiddleware,UserCont.removeWishlist);
 
 
