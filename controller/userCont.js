@@ -137,19 +137,106 @@ exports.getCart = catchAsync(async(req,res,next)=>{
 // wishlist
 
 exports.addToWishlist = catchAsync(async(req,res,next)=>{ 
-    const newWishlist = new Wishlist({ user: req.user.id,product:req.params.id});
-    await newWishlist.save();
-    res.status(201).json(newWishlist);
-});
+        // Validate user ID and product ID
+        const userId = req.user.id;
+        const productId = req.body.productId;
+      
+        if (!userId) {
+          return next(new appError('No such user found', 400));
+        }
+      
+        if (!productId) {
+          return res.status(400).send({ status: false, message: 'Invalid product' });
+        }
+      
+        // Fetch user and product details
+        const user = await User.findById(userId);
+        const product = await Product.findById(productId);
+      
+        if (!user) {
+          return res.status(400).send({ status: false, message: 'Invalid user' });
+        }
+      
+        if (!product) {
+          return res.status(400).send({ status: false, message: 'Invalid product' });
+        }
+      
+        // Check if user has a wishlist
+        let wishData = await Wishlist.findOne({ userId });
+      
+        if (wishData) {
+          // Check for existing product in wishlist
+          const itemIndex = wishData.products.findIndex((p) => p.productId.toString() === productId.toString());
+      
+          if (itemIndex > -1) {
+            // Product already exists in wishlist
+            return res.status(400).send({ status: false, message: 'Product already in wishlist' });
+          } else {
+            // Add product to existing wishlist
+            wishData.products.push({
+              productId: product._id, // Use product's _id for consistency
+              description: product.description,
+              price: product.price,
+              image: product.image,
+            });
+      
+            await wishData.save();
+            wishData = await wishData.populate('products.productId'); // Populate product data if needed
+          }
+        } else {
+          // Create a new wishlist for the user
+          newWish = await Wishlist.create({
+            userId,
+            products: [{
+              productId: product._id, // Use product's _id for consistency
+              description: product.description,
+              price: product.price,
+              image: product.image,
+            }],
+          });
+      
+          await newWish.save();
+          wishData = newWish; // Assign created wishlist to wishData for response
+          wishData = await wishData.populate('products.productId'); // Populate product data if needed
+        }
+      
+        res.status(201).json({
+          message: 'Product added to wishlist successfully',
+          wishlist: wishData,
+        });
+}); 
 
 exports.getaAllWishlist = catchAsync(async(req,res,next)=>{
-    const user = req.user.id
-    const wishData = await Wishlist.find({ user});
-    console.log(wishData);
-    if(!wishData){
-        return next(new appError('rating not found!',404)) 
+    const userId = req.user.id
+    if (!userId){
+        res.status(400)
+        throw new Error('No such user Found')
     }
-    res.status(200).json({
-        wishData
+    const userAvailable = await User?.findById(userId);
+    let wish = await Wishlist.findOne({ userId: userId });
+    if (!wish)
+      return res
+        .status(404)
+        .send({ status: false, message: "Wishlist not found for this user" });
+    res.status(200).send({ status: true, wish: wish });
+});
+
+exports.removeWishlist = catchAsync(async(req,res,next)=>{
+    const userId = req.user.id;
+    const productId = req.params.id;
+    const wishData = await Wishlist.findOne({userId:userId});
+    if(!wishData){
+        return next(new appError('Wishlist not found with that Id !',404))
+    }
+    const response = await Wishlist.findOneAndUpdate({userId:userId},{
+        $pull:{ 
+            products:{
+                productId:productId
+            }
+        }   
+    });
+    res.status(201).json({  
+        status:"success",
+        data:response
     })
 });
